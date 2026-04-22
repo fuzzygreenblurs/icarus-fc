@@ -54,9 +54,11 @@ dkms.conf
 # debug information files
 *.dwo
 
+# build files
+build/
+
 # documentation
-*/.DS_STORE
-*/PROJECT_PLAN.md
-*/notes
+.DS_Store
+PROJECT_PLAN.md
 INTERVIEW_PREP.md
 
