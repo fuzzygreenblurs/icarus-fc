@@ -53,3 +53,10 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# documentation
+*/.DS_STORE
+*/PROJECT_PLAN.md
+*/notes
+INTERVIEW_PREP.md
+
