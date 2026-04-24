@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.20)
+project(icarus LANGUAGES C)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
+if(DEFINED BOARD)
+  add_executable(fw_hover src/main.c)
+else()
+  add_executable(lh_hover src/main.c)
+endif()
