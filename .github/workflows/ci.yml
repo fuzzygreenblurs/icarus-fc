@@ -8,6 +8,8 @@ on:
 jobs:
   one-d-host-build:
     runs-on: ubuntu-latest
-    steps: - uses: actions/checkout@v5 - name: 1d-stabilizer-build
+    steps:
+      - uses: actions/checkout@v5
+      - name: 1d-stabilizer-build
         working-directory: 1d_stabilizer 
-        run: cmake -S . -B build/host && cmake --build build/host 
+        run: cmake -S . -B build/host && cmake --build build/host
