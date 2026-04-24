@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working_directory: 1d_stabilizer
+        working-directory: 1d_stabilizer
     steps:
       - uses: actions/checkout@v5
 
