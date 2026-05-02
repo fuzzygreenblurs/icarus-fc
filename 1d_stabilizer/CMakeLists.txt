@@ -17,6 +17,7 @@ if(CMAKE_C_COMPILER MATCHES "arm-none-eabi")
     lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usart.c
     lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_utils.c
     lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_exti.c
+    lib/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_spi.c
   )
 
   add_executable(fw_hover ${LL_SOURCES} ${BSP_SOURCES} ${BSP_ASM}) # main included through bsp/board.c
