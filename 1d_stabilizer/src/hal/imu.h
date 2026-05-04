@@ -14,13 +14,11 @@ typedef enum {
 typedef struct imu_t imu_t;
 
 typedef struct imu_sample_t {
-  //accel: [ms2]
-  float accel_x;
+  float accel_x;  // accel: [ms2]
   float accel_y;
   float accel_z;
 
-  //gyro : [dps]
-  float gyro_x;
+  float gyro_x;   // gyro: dps 
   float gyro_y;
   float gyro_z;
 } imu_sample_t;
@@ -31,11 +29,11 @@ typedef enum {
   IMU_ERR_TIMEOUT,
   IMU_ERR_NOT_READY,
   IMU_ERR_COUNT
-} imu_err_t;
+} imu_status_t;
 
-imu_err_t imu_init(imu_t* dev); 
-imu_err_t imu_read_sample(imu_t* dev, imu_sample_t* out);
+imu_status_t imu_init(void); 
+imu_status_t imu_read_sample(imu_sample_t* out);
 imu_t* imu_get(imu_id_t imu_id);
-bool imu_is_healthy(const imu_t* dev);
+bool imu_is_healthy(void);
 
 #endif

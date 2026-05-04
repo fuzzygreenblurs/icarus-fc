@@ -41,6 +41,7 @@ if(CMAKE_C_COMPILER MATCHES "arm-none-eabi")
 
   # include paths to specify to the compiler where to find headers
   target_include_directories(fw_hover PRIVATE
+    src
     src/bsp/nucleo_f446re                    # -> includes src/bsp/nucleo_f446re directory in the file search path:
                                              #   - this includes the CubeMX generated: 
                                              #      - main.h: includes usart/rcc/gpio LL headers, board pin macros, error handlers
@@ -57,7 +58,8 @@ if(CMAKE_C_COMPILER MATCHES "arm-none-eabi")
                                                                             #   - defines flash + RAM regions
                                                                             #   - specifies where to place each section
                                                                             # -> note: linker flags (CPU_FLAGS) defined in compiler setup script 
-    --specs=nano.specs                                                      # -> use newlib-nano: condensed embedded C lib (covers printf, malloc, memcpy, etc.) 
+    --specs=nano.specs                                                      # -> use newlib-nano: condensed embedded C lib (covers printf, malloc, memcpy, etc.)
+    -u _printf_float
     -Wl,--gc-sections                                                       # -> strip unused funcitons/data from final bin
   )
 

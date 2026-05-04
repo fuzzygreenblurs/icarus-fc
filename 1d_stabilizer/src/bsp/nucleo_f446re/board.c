@@ -18,12 +18,12 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-extern uint8_t imu_read_whoami(void);
+#include "main.h"
+#include "hal/imu.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,19 +103,26 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char buf[80];
+  imu_init();
+  bool health = imu_is_healthy();
+  snprintf(buf, sizeof(buf), "IMU: %s \r\n", health ? "OK" : "OFFLINE");
+  uart_send_str(buf);
+
   while (1)
   {
     /* USER CODE END WHILE */
-    char buf[32];
-    uint8_t v = imu_read_whoami();
-    snprintf(buf, sizeof(buf), "WHO_AM_I: 0x%02X\r\n", v);
-    uart_send_str(buf);
-    LL_mDelay(500);
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
-}
+    imu_sample_t s;
+    imu_read_sample(&s);
+    snprintf(buf, sizeof(buf),
+             "a=[%6.2f %6.2f %6.2f], g=[%6.1f %6.1f %6.1f]\r\n",
+             s.accel_x, s.accel_y, s.accel_z,
+             s.gyro_x, s.gyro_y, s.gyro_z);
 
+    uart_send_str(buf);
+    LL_mDelay(100);
+  }
+}
 /**
   * @brief System Clock Configuration
   * @retval None
